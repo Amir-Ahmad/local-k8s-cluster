@@ -10,10 +10,10 @@ Local kubernetes cluster with [kind](https://github.com/kubernetes-sigs/kind), [
 
 ## Get started
 
-1. Set a LOCAL_DOMAIN_NAME in .env file. This domain should be a wildcard domain that redirects to 127.0.0.1. If you don't have one, you can use one from [here](https://gist.github.com/tinogomes/c425aa2a56d289f16a1f4fcb8a65ea65). e.g.
+1. Set a LOCAL_DOMAIN_NAME in .env file. This domain should be a wildcard domain that redirects to 127.0.0.1. If you don't have one, you can use one from [here](https://gist.github.com/tinogomes/c425aa2a56d289f16a1f4fcb8a65ea65) or [here](https://stackoverflow.com/questions/1562954/public-wildcard-domain-name-to-resolve-to-127-0-0-1). e.g.
 
 ```
-echo "LOCAL_DOMAIN_NAME=localtest.me" > .env
+echo "LOCAL_DOMAIN_NAME=vcap.me" > .env
 ```
 
 2. Create cert
@@ -34,7 +34,7 @@ just create-cluster
 just deploy-hello
 ```
 
-You should now be able to access this at https://localtest.me/hello
+You should now be able to access this at https://vcap.me/hello
 
 
 ## What else
