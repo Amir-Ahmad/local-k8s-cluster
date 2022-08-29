@@ -10,25 +10,23 @@ Local kubernetes cluster with [kind](https://github.com/kubernetes-sigs/kind), [
 
 ## Get started
 
-1. Set a LOCAL_DOMAIN_NAME in .env file. This domain should be a wildcard domain that redirects to 127.0.0.1. If you don't have one, you can use one from [here](https://gist.github.com/tinogomes/c425aa2a56d289f16a1f4fcb8a65ea65) or [here](https://stackoverflow.com/questions/1562954/public-wildcard-domain-name-to-resolve-to-127-0-0-1). e.g.
+This requires a wildcard domain name that points to 127.0.0.1. This is so we don't need to edit our /etc/hosts file.
 
-```
-echo "LOCAL_DOMAIN_NAME=vcap.me" > .env
-```
+By default it uses vcap.me (owned by CloudFoundry), but this can be overridden (see local_domain_name in the Justfile). Some other domains can be found [here](https://gist.github.com/tinogomes/c425aa2a56d289f16a1f4fcb8a65ea65) and [here](https://stackoverflow.com/questions/1562954/public-wildcard-domain-name-to-resolve-to-127-0-0-1).
 
-2. Create cert
+1. Create cert
 
 ```
 just create-cert
 ```
 
-3. Create cluster
+2. Create cluster
 
 ```
 just create-cluster
 ```
 
-4. Deploy a hello application
+3. Deploy a hello application
 
 ```
 just deploy-hello
