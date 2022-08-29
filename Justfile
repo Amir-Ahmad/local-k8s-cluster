@@ -1,11 +1,8 @@
-local_domain_name := env_var('LOCAL_DOMAIN_NAME')
+local_domain_name := env_var_or_default('LOCAL_DOMAIN_NAME', 'vcap.me')
 cluster_name := env_var_or_default('CLUSTER_NAME', 'dev')
 kindconfig := justfile_directory() / "kindconfig.yaml"
 kubeconfig := "$HOME/.kube/kindconfig"
 kubectl := "kubectl --kubeconfig=" + kubeconfig + " --context kind-" + cluster_name
-
-# load .env file
-set dotenv-load := true
 
 # Print help
 @help:
