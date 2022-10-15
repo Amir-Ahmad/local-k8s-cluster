@@ -26,9 +26,10 @@ just create-cert
 just create-cluster
 ```
 
-3. Deploy a hello application
+3. Deploy ingress-nginx controller and a hello application
 
 ```
+just deploy-ingress
 just deploy-hello
 ```
 

@@ -23,6 +23,8 @@ kubectl := "kubectl --kubeconfig=" + kubeconfig + " --context kind-" + cluster_n
         kind create cluster --kubeconfig "{{kubeconfig}}" --config "{{kindconfig}}" --name "{{cluster_name}}"; \
     fi
 
+# Deploy ingress controller with tls certificate
+@deploy-ingress:
     # Create tls secret
     {{kubectl}} create secret tls localcert --key certs/server.key --cert certs/server.crt \
           --dry-run=client -o yaml | {{kubectl}} apply -f -
