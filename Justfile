@@ -1,4 +1,4 @@
-local_domain_name := env_var_or_default('LOCAL_DOMAIN_NAME', 'vcap.me')
+local_domain_name := env_var_or_default('LOCAL_DOMAIN_NAME', 'localtest.me')
 cluster_name := env_var_or_default('CLUSTER_NAME', 'dev')
 kindconfig := justfile_directory() / "kindconfig.yaml"
 kubeconfig := "$HOME/.kube/kindconfig"
@@ -23,6 +23,13 @@ kubectl := "kubectl --kubeconfig=" + kubeconfig + " --context kind-" + cluster_n
         kind create cluster --kubeconfig "{{kubeconfig}}" --config "{{kindconfig}}" --name "{{cluster_name}}"; \
     fi
 
+# Delete cluster
+@delete-cluster:
+    kind delete cluster --name "{{cluster_name}}"
+
+# Recreate cluster
+@recreate-cluster: delete-cluster create-cluster
+
 # Deploy ingress controller with tls certificate
 @deploy-ingress:
     # Create tls secret
@@ -37,10 +44,6 @@ kubectl := "kubectl --kubeconfig=" + kubeconfig + " --context kind-" + cluster_n
         --for=condition=ready pod \
         --selector=app.kubernetes.io/component=controller \
         --timeout=90s
-
-# Delete cluster
-@delete-cluster:
-    kind delete cluster --name "{{cluster_name}}"
 
 # Deploy a nginx hello app
 @deploy-hello:
